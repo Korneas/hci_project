@@ -24,7 +24,7 @@ public class SerialCom extends Observable implements Runnable {
 		for (SerialPort port : ports) {
 			System.out.println(i++ + ": " + port.getSystemPortName());
 		}
-		port = ports[2];
+		port = ports[1];
 
 		if (port.openPort()) {
 			System.out.println("start");
@@ -65,19 +65,19 @@ public class SerialCom extends Observable implements Runnable {
 
 	@Override
 	public void run() {
-
-		while (s.hasNextLine()) {
-			try {
-				var = (int) filtro(Integer.parseInt(s.nextLine()));
-				if (var != 0) {
-					setChanged();
-					notifyObservers(var);
-					clearChanged();
+		while (true) {
+			while (s.hasNextLine()) {
+				try {
+					var = (int) filtro(Integer.parseInt(s.nextLine()));
+					if (var != 0) {
+						setChanged();
+						notifyObservers(var);
+						clearChanged();
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
 			}
 		}
-
 	}
 }

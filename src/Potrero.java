@@ -15,22 +15,13 @@ public class Potrero {
 	private boolean seg;
 	private int num_pastos;
 
-	private LinkedList<Pasto> pastos = new LinkedList<Pasto>();
+	private LinkedList<Pasto> pastos;
 	private int var = 10000;
 
 	public Potrero(PApplet app) {
 		this.app = app;
 		cabras = new ArrayList<Cabra>();
-
-		/*-------------Pastos-------------*/
-		num_pastos = (int) PApplet.map(energia, 0, 10000, 0, 800);
-		for (int i = 0; i < num_pastos; i++) {
-			int x = (int) app.random(0, app.width);
-			int y = (int) app.random(0, app.height);
-			int radio = (int) app.random(10, 30);
-			pastos.add(new Pasto(x, y, radio));
-
-		}
+		pastos = new LinkedList<Pasto>();
 	}
 
 	/**
@@ -42,6 +33,14 @@ public class Potrero {
 			for (int i = 0; i < 5; i++) {
 				cabras.add(new Cabra(app));
 				cabras.get(i).start();
+			}
+
+			num_pastos = (int) PApplet.map(energia, 0, 10000, 0, 800);
+			for (int i = 0; i < num_pastos; i++) {
+				int x = (int) app.random(0, app.width);
+				int y = (int) app.random(0, app.height);
+				int radio = (int) app.random(10, 30);
+				pastos.add(new Pasto(x, y, radio));
 			}
 			inicializado = true;
 		}
@@ -88,8 +87,9 @@ public class Potrero {
 	/**
 	 * Este metodo recibe la cantidad de segundos que ha transcurrido desde que
 	 * inició el juego (no desde que inicio la aplicacion). Cada 10 segundos la
-	 * energía del potrero disminuye en x unidades por cada cabra que haya en el
-	 * potrero. Las unidades estan definidas en la variable consumoEnergíaCabra
+	 * energía del potrero disminuye en x unidades por cada cabra que haya en
+	 * el potrero. Las unidades estan definidas en la variable
+	 * consumoEnergíaCabra
 	 * 
 	 * @param time
 	 */
@@ -133,11 +133,12 @@ public class Potrero {
 
 	/**
 	 * Este método debe tomar la lectura de la fotocelda y acumularla en una
-	 * variable. La acumulación se hace una vez por segundo. El potrero no tiene
-	 * límite de acumulación de energía.
+	 * variable. La acumulación se hace una vez por segundo. El potrero no
+	 * tiene límite de acumulación de energía.
 	 */
-	public void addEnergia() {
-		// Escribir el código aqui
+	public void addEnergia(int energy) {
+		energy = (int) PApplet.map(energy, 0, 1024, 0, 1000);
+		energia += energy;
 	}
 
 	//// ***** GETTERS & SETTERS ******

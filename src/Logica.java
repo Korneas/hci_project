@@ -4,6 +4,7 @@ import java.util.Observer;
 
 import common.Message;
 import communication.Communication_to_Server;
+import comunicacion_serial.SerialCom;
 import logic.User;
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -21,6 +22,7 @@ public class Logica extends PApplet implements Observer {
 	private LinkedList<Cabra> cabras = new LinkedList<Cabra>();
 	private int valor_fotoCelda;
 	private int r = 0;
+	private boolean init;
 
 	public void settings() {
 		size(700, 700);
@@ -32,11 +34,13 @@ public class Logica extends PApplet implements Observer {
 		user = new User();
 		cts = Communication_to_Server.getInstance(user);
 		cts.setIp("127.0.0.1");
+
+		SerialCom.getRef().addObserver(this);
 	}
 
 	public void draw() {
 		// System.out.println(cts.lastMessage.getStringValues());
-		background(0);
+		background(50);
 
 		// Datos de identificación y reporte
 		text("Mi id: " + user.getId(), 100, 90);
@@ -53,7 +57,12 @@ public class Logica extends PApplet implements Observer {
 			// Pobla el potrero y le asigna energia inicial
 			potrero.init();
 
-			text("Empezó ", 100, 170);
+			if (!init) {
+				new Thread(SerialCom.getRef()).start();
+				init = true;
+			}
+
+			text("Empezo ", 100, 170);
 
 			// cada 1 segundos
 			if (millis() - timer >= 1000) {
@@ -82,7 +91,7 @@ public class Logica extends PApplet implements Observer {
 			potrero.actualizarEnergia(time);
 			potrero.updateGrass();
 			potrero.updateGoat(time);
-			
+
 		} else {
 			text("En Pausa ", 100, 170);
 		}
@@ -116,7 +125,9 @@ public class Logica extends PApplet implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-
+		if (millis() - timer >= 1000) {
+			valor_fotoCelda = (int) arg;
+			System.out.println(valor_fotoCelda);
+		}
 	}
 }
