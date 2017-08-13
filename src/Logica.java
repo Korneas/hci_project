@@ -8,6 +8,7 @@ import comunicacion_serial.SerialCom;
 import logic.User;
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.serial.*;
 
 public class Logica extends PApplet implements Observer {
 
@@ -23,6 +24,8 @@ public class Logica extends PApplet implements Observer {
 	private int valor_fotoCelda;
 	private int r = 0;
 	private boolean init;
+
+	private Thread t;
 
 	public void settings() {
 		size(700, 700);
@@ -58,7 +61,8 @@ public class Logica extends PApplet implements Observer {
 			potrero.init();
 
 			if (!init) {
-				new Thread(SerialCom.getRef()).start();
+				t = new Thread(SerialCom.getRef());
+				t.start();
 				init = true;
 			}
 
@@ -92,6 +96,10 @@ public class Logica extends PApplet implements Observer {
 			potrero.updateGrass();
 			potrero.updateGoat(time);
 
+			if (!t.isAlive()) {
+				t.interrupt();
+				t.start();
+			}
 		} else {
 			text("En Pausa ", 100, 170);
 		}
@@ -125,9 +133,10 @@ public class Logica extends PApplet implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (millis() - timer >= 1000) {
-			valor_fotoCelda = (int) arg;
-			System.out.println(valor_fotoCelda);
-		}
+		// if (millis() - timer >= 1000) {
+		valor_fotoCelda = (int) arg;
+		potrero.addEnergia(valor_fotoCelda);
+		System.out.println("Se adiciono "+valor_fotoCelda+" de energia");
+		// }
 	}
 }

@@ -27,7 +27,7 @@ public class SerialCom extends Observable implements Runnable {
 		port = ports[1];
 
 		if (port.openPort()) {
-			System.out.println("start");
+			// System.out.println("start");
 		}
 
 		port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
@@ -37,7 +37,6 @@ public class SerialCom extends Observable implements Runnable {
 		indice = 0;
 		muestras = new int[10];
 		sumatoria = 0;
-
 	}
 
 	public static SerialCom getRef() {
@@ -68,7 +67,7 @@ public class SerialCom extends Observable implements Runnable {
 		while (true) {
 			while (s.hasNextLine()) {
 				try {
-					var = (int) filtro(Integer.parseInt(s.nextLine()));
+					var = (int) Float.parseFloat(s.nextLine());
 					if (var != 0) {
 						setChanged();
 						notifyObservers(var);

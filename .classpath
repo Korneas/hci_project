@@ -23,6 +23,12 @@
 	<classpathentry kind="lib" path="libs/jogl-all-natives-windows-i586.jar"/>
 	<classpathentry kind="lib" path="libs/jogl-all.jar"/>
 	<classpathentry kind="lib" path="libs/jSerialComm-1.3.11.jar"/>
+	<classpathentry kind="lib" path="libs/jssc.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="EjemploClienteCabras/libs/macosx"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/serial.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/TCP_Universar_Client"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

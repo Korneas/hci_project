@@ -87,9 +87,8 @@ public class Potrero {
 	/**
 	 * Este metodo recibe la cantidad de segundos que ha transcurrido desde que
 	 * inició el juego (no desde que inicio la aplicacion). Cada 10 segundos la
-	 * energía del potrero disminuye en x unidades por cada cabra que haya en
-	 * el potrero. Las unidades estan definidas en la variable
-	 * consumoEnergíaCabra
+	 * energía del potrero disminuye en x unidades por cada cabra que haya en el
+	 * potrero. Las unidades estan definidas en la variable consumoEnergíaCabra
 	 * 
 	 * @param time
 	 */
@@ -133,8 +132,8 @@ public class Potrero {
 
 	/**
 	 * Este método debe tomar la lectura de la fotocelda y acumularla en una
-	 * variable. La acumulación se hace una vez por segundo. El potrero no
-	 * tiene límite de acumulación de energía.
+	 * variable. La acumulación se hace una vez por segundo. El potrero no tiene
+	 * límite de acumulación de energía.
 	 */
 	public void addEnergia(int energy) {
 		energy = (int) PApplet.map(energy, 0, 1024, 0, 1000);
@@ -201,7 +200,7 @@ public class Potrero {
 		public void pintar() {
 			app.fill(r, g, b, t);
 			app.noStroke();
-			app.ellipse((float) (x + onda), y, radio, radio);
+			app.ellipse((float) (x + onda), y, radio + energia / 10000, radio + energia / 10000);
 		}
 
 	}

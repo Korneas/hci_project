@@ -14,6 +14,7 @@ public class Cabra extends Thread {
 	private PVector velocity;
 	private PVector acceleration;
 	private PVector direccion;
+	private float magni;
 
 	private float topspeed;
 	private int cambio;
@@ -48,7 +49,7 @@ public class Cabra extends Thread {
 		if (timeGoat != time) {
 			timeGoat = time;
 			timeOrg++;
-			//System.out.println(timeOrg);
+			// System.out.println(timeOrg);
 			if (timeOrg % 2 == 0 && timeOrg != 0) {
 				energia -= 2;
 			}
@@ -118,7 +119,8 @@ public class Cabra extends Thread {
 
 		acceleration = PVector.sub(direccion, location);
 		// Set magnitude of acceleration
-		acceleration.setMag((float) 0.5);
+		magni = PApplet.map(energia, 0, 150, 0, (float) 0.5);
+		acceleration.setMag(magni);
 		// Velocity changes according to acceleration
 		velocity.add(acceleration);
 		// Limit the velocity by topspeed
