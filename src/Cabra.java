@@ -170,4 +170,8 @@ public class Cabra extends Thread {
 		this.time = time;
 	}
 
+	public int getTimeOrg() {
+		return timeOrg;
+	}
+
 }

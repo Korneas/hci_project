@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
+import sound.Reproductor;
 
 public class Potrero {
 	private int energia;
@@ -18,10 +19,13 @@ public class Potrero {
 	private LinkedList<Pasto> pastos;
 	private int var = 10000;
 
+	private Reproductor r;
+
 	public Potrero(PApplet app) {
 		this.app = app;
 		cabras = new ArrayList<Cabra>();
 		pastos = new LinkedList<Pasto>();
+		r = new Reproductor(app);
 	}
 
 	/**
@@ -69,6 +73,7 @@ public class Potrero {
 		cabras.get(0).interrupt();
 		cabras.remove(cabras.get(0));
 		cabrasFallecidas++;
+		r.reproducir_sample(1);
 	}
 
 	/**
@@ -82,6 +87,7 @@ public class Potrero {
 		cabra.interrupt();
 		cabras.remove(cabra);
 		cabrasFallecidas++;
+		r.reproducir_sample(1);
 	}
 
 	/**
@@ -119,6 +125,11 @@ public class Potrero {
 			if (energia >= 10 && seg) {
 				cabras.get(i).setEnergia(consumoEnergiaCabra);
 				seg = false;
+			}
+
+			if (cabras.get(i).getTimeOrg() % 6 == 0) {
+				
+				r.reproducir_sample(0);
 			}
 		}
 	}

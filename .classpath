@@ -29,6 +29,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/serial.jar"/>
+	<classpathentry kind="lib" path="musica/jl1.0.jar"/>
+	<classpathentry kind="lib" path="musica/jsminim.jar"/>
+	<classpathentry kind="lib" path="musica/minim.jar"/>
+	<classpathentry kind="lib" path="musica/mp3spi1.9.4.jar"/>
+	<classpathentry kind="lib" path="musica/tritonus_aos.jar"/>
+	<classpathentry kind="lib" path="musica/tritonus_share.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/TCP_Universar_Client"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
