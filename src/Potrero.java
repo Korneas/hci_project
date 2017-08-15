@@ -13,7 +13,7 @@ public class Potrero {
 	private int consumoEnergiaCabra = 10;
 	private boolean inicializado = false;
 	private int time2;
-	private boolean seg;
+	private boolean seg, seg2;
 	private int num_pastos;
 
 	private LinkedList<Pasto> pastos;
@@ -117,9 +117,10 @@ public class Potrero {
 				removeCabra(cabras.get(i));
 			}
 
-			if (time == time2) {
+			if (time != time2) {
 				seg = true;
-				time2++;
+				seg2 = true;
+				time2 = time;
 			}
 
 			if (energia >= 10 && seg) {
@@ -128,7 +129,7 @@ public class Potrero {
 			}
 
 			if (cabras.get(i).getTimeOrg() % 6 == 0) {
-				
+
 				r.reproducir_sample(0);
 			}
 		}
@@ -147,8 +148,11 @@ public class Potrero {
 	 * límite de acumulación de energía.
 	 */
 	public void addEnergia(int energy) {
-		energy = (int) PApplet.map(energy, 0, 1024, 0, 1000);
-		energia += energy;
+		if (seg2) {
+			energy = (int) PApplet.map(energy, 0, 1024, 0, 1000);
+			energia += energy;
+			seg2 = false;
+		}
 	}
 
 	//// ***** GETTERS & SETTERS ******
