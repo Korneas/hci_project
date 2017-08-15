@@ -13,11 +13,12 @@ public class Potrero {
 	private int consumoEnergiaCabra = 10;
 	private boolean inicializado = false;
 	private int time2;
-	private boolean seg, seg2;
+	private boolean seg, seg2, seg3;
 	private int num_pastos;
 
 	private LinkedList<Pasto> pastos;
 	private int var = 10000;
+	private int ranTime;
 
 	private Reproductor r;
 
@@ -108,6 +109,14 @@ public class Potrero {
 	}
 
 	public void updateGoat(int time) {
+
+		if (time2 != time) {
+			seg2 = true;
+			seg = true;
+			seg3 = true;
+			time2 = time;
+		}
+
 		for (int i = 0; i < cabras.size(); i++) {
 			cabras.get(i).setTime(time);
 			cabras.get(i).existir();
@@ -117,20 +126,28 @@ public class Potrero {
 				removeCabra(cabras.get(i));
 			}
 
-			if (time != time2) {
-				seg = true;
-				seg2 = true;
-				time2 = time;
+			if (seg) {
+				if (energia >= 10) {
+					cabras.get(i).setEnergia(consumoEnergiaCabra);
+					energia -= 10;
+				}
+
+				if (cabras.get(i) == cabras.get(cabras.size() - 1)) {
+					seg = false;
+				}
+			}
+		}
+
+		if (cabras.size() > 0) {
+			if (time % 5 == 0 && seg3) {
+				ranTime = (int) app.random(time, time + 5);
+				seg3 = false;
 			}
 
-			if (energia >= 10 && seg) {
-				cabras.get(i).setEnergia(consumoEnergiaCabra);
-				seg = false;
-			}
-
-			if (cabras.get(i).getTimeOrg() % 6 == 0) {
-
+			if (ranTime == time) {
 				r.reproducir_sample(0);
+				ranTime = 0;
+				System.out.println("Grito " + ranTime + ":" + time);
 			}
 		}
 	}
@@ -215,7 +232,7 @@ public class Potrero {
 		public void pintar() {
 			app.fill(r, g, b, t);
 			app.noStroke();
-			app.ellipse((float) (x + onda), y, radio + energia / 10000, radio + energia / 10000);
+			app.ellipse((float) (x + onda), y, radio + energia / 5000, radio + energia / 5000);
 		}
 
 	}

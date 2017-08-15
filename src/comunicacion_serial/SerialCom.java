@@ -24,7 +24,7 @@ public class SerialCom extends Observable implements Runnable {
 		for (SerialPort port : ports) {
 			System.out.println(i++ + ": " + port.getSystemPortName());
 		}
-		port = ports[1];
+		port = ports[3];
 
 		if (port.openPort()) {
 			// System.out.println("start");
