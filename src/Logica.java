@@ -36,8 +36,8 @@ public class Logica extends PApplet implements Observer {
 		time = 0;
 		user = new User();
 		cts = Communication_to_Server.getInstance(user);
-		//cts.setIp("127.0.0.1");
-		cts.setIp("192.168.115.2");
+		cts.setIp("127.0.0.1");
+		//cts.setIp("192.168.115.2");
 
 		SerialCom.getRef().addObserver(this);
 	}
@@ -137,7 +137,7 @@ public class Logica extends PApplet implements Observer {
 		// if (millis() - timer >= 1000) {
 		valor_fotoCelda = (int) arg;
 		potrero.addEnergia(valor_fotoCelda);
-		System.out.println("Se adiciono "+valor_fotoCelda+" de energia");
+		//System.out.println("Se adiciono "+valor_fotoCelda+" de energia");
 		// }
 	}
 }

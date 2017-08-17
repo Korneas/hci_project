@@ -34,7 +34,7 @@ public class Potrero {
 	 */
 	public void init() {
 		if (!inicializado) {
-			energia = 10000;
+			energia = 0;
 			for (int i = 0; i < 5; i++) {
 				cabras.add(new Cabra(app));
 				cabras.get(i).start();
@@ -129,7 +129,7 @@ public class Potrero {
 			if (seg) {
 				if (energia >= 10) {
 					cabras.get(i).setEnergia(consumoEnergiaCabra);
-					energia -= 10;
+					//energia -= 10;
 				}
 
 				if (cabras.get(i) == cabras.get(cabras.size() - 1)) {
@@ -168,6 +168,7 @@ public class Potrero {
 		if (seg2) {
 			energy = (int) PApplet.map(energy, 0, 1024, 0, 1000);
 			energia += energy;
+			System.out.println("Se adiciono: " + energia);
 			seg2 = false;
 		}
 	}
@@ -232,7 +233,7 @@ public class Potrero {
 		public void pintar() {
 			app.fill(r, g, b, t);
 			app.noStroke();
-			app.ellipse((float) (x + onda), y, radio + energia / 5000, radio + energia / 5000);
+			app.ellipse((float) (x + onda), y, radio / 2 + energia / 1000, radio / 2 + energia / 1000);
 		}
 
 	}

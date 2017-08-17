@@ -52,6 +52,7 @@ public class Cabra extends Thread {
 			// System.out.println(timeOrg);
 			if (timeOrg % 2 == 0 && timeOrg != 0) {
 				energia -= 2;
+				System.out.println("Energia actual: " + energia);
 			}
 
 		}
