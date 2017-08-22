@@ -10,7 +10,7 @@ public class Potrero {
 	public PApplet app;
 	private ArrayList<Cabra> cabras;
 	private int cabrasFallecidas = 0;
-	private int consumoEnergiaCabra = 10;
+	private int consumoEnergiaCabra = 15;
 	private boolean inicializado = false;
 	private int time2;
 	private boolean seg, seg2, seg3;
@@ -127,9 +127,9 @@ public class Potrero {
 			}
 
 			if (seg) {
-				if (energia >= 10) {
+				if (energia >= consumoEnergiaCabra) {
 					cabras.get(i).setEnergia(consumoEnergiaCabra);
-					//energia -= 10;
+					energia -= consumoEnergiaCabra;
 				}
 
 				if (cabras.get(i) == cabras.get(cabras.size() - 1)) {
