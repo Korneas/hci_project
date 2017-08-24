@@ -36,8 +36,8 @@ public class Logica extends PApplet implements Observer {
 		time = 0;
 		user = new User();
 		cts = Communication_to_Server.getInstance(user);
-		cts.setIp("127.0.0.1");
-		//cts.setIp("192.168.115.2");
+		//cts.setIp("127.0.0.1");
+		cts.setIp("192.168.115.2");
 
 		SerialCom.getRef().addObserver(this);
 	}

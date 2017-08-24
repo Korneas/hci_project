@@ -34,7 +34,7 @@ public class Potrero {
 	 */
 	public void init() {
 		if (!inicializado) {
-			energia = 0;
+			energia = var;
 			for (int i = 0; i < 5; i++) {
 				cabras.add(new Cabra(app));
 				cabras.get(i).start();
@@ -100,12 +100,12 @@ public class Potrero {
 	 * @param time
 	 */
 	public void actualizarEnergia(int time) {
-		if (time % 10 == 0) {
-			energia -= cabras.size() * consumoEnergiaCabra;
-			if (energia < 0) {
-				energia = 0;
-			}
-		}
+//		if (time % 10 == 0) {
+//			energia -= cabras.size() * consumoEnergiaCabra;
+//			if (energia < 0) {
+//				energia = 0;
+//			}
+//		}
 	}
 
 	public void updateGoat(int time) {
